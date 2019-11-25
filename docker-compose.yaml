@@ -13,5 +13,6 @@ services:
     container_name: reverse-proxy
     volumes:
       # ssl
-      # - /home/daniel/ssl:/usr/local/apache2/ssl
+      - ${PWD}/ssl:/usr/local/apache2/ssl
       - ${PWD}/sites:/usr/local/apache2/conf/sites
+      - ${PWD}/logs:/usr/local/apache2/logs/
