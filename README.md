@@ -1,30 +1,26 @@
 # ReverseProxy
-Apache Reverse Proxy for Production Server
+Nginx Reverse Proxy for Production Server
 
-The Reverse Proxy runs as an Apache2 server within a docker container. When a new application is set up and given a port, an endpoint should be configured for it.
+The Reverse Proxy runs as an Nginx server within a docker container. When a new application is set up and given a port, an endpoint should be configured for it.
 
-## Adding an Endpoint
+### Adding an Endpoint
 
 To add an endpoint to the Reverse Proxy a few steps have to be taken
 
-### Adding a Proxy Pass
+#### Adding a Proxy Pass
 
-First head to [the site configuration file]() and add a Proxy at the bottom of the file before the `</VirtualHost>`.
+Add the new endpoint as a entry in the [config file](https://github.com/Capping-WAR/ReverseProxy/blob/master/nginx.conf)
 
-Example Proxy Config:
-```config
-# War Docs
-
-ProxyPass /docs http://war.marist.ai:3001
-ProxyPassReverse /docs http://war.marist.ai:3001
-
-<Location /docs/*>
- Order allow,deny
- Allow from all
-</Location>
+Example: 
+```conf
+server {
+    listen 80;
+    
+    location / {
+        proxy_pass http://10.11.17.26:30080/;
+    }
+}
 ```
-
-**Note: If the app needs to be available on https as well, add the same configurations to [the https site configuration file]()**
 
 ### Redeploy the Reverse Proxy
 
