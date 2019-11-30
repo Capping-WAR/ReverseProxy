@@ -1,8 +1,9 @@
-FROM httpd:latest
+FROM nginx
+MAINTAINER Daniel Gisolfi
+RUN apt-get update -y
 
-COPY httpd.conf /usr/local/apache2/conf/httpd.conf
-RUN mkdir -p /usr/local/apache2/conf/sites/
-RUN echo "127.0.0.1 war.marist.ai" >> /etc/hosts
-
+COPY ./nginx.conf /etc/nginx/conf.d/default.conf
+COPY ./ssl/privkey.key /etc/nginx/ssl/nginx.key
+COPY ./ssl/fullchain.pem /etc/nginx/ssl/nginx.pem
+ 
 EXPOSE 80
-CMD ["httpd", "-D", "FOREGROUND"]

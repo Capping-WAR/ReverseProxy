@@ -4,15 +4,10 @@
 
 version: "2"
 services: 
-   reverse-proxy:
+  nginx:
     build: .
     restart: unless-stopped
     ports:
       - "80:80"
       - "443:443"
     container_name: reverse-proxy
-    volumes:
-      # ssl
-      - ${PWD}/ssl:/usr/local/apache2/ssl
-      - ${PWD}/sites:/usr/local/apache2/conf/sites
-      - ${PWD}/logs:/usr/local/apache2/logs/
