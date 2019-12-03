@@ -5,7 +5,7 @@
 version: "2"
 services: 
   nginx:
-    build: .
+    image: dgisolfi/war-reverse-proxy
     restart: unless-stopped
     ports:
       - "80:80"
