@@ -11,3 +11,5 @@ services:
       - "80:80"
       - "443:443"
     container_name: reverse-proxy
+    volumes:
+      - ./ssl:/etc/nginx/ssl
